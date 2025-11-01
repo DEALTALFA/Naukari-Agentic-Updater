@@ -31,4 +31,15 @@ jobs:
         env:
           NAUKRI_USER: ${{ secrets.NAUKRI_USER }}
           NAUKRI_PASS: ${{ secrets.NAUKRI_PASS }}
+      - name: Upload Screenshots
+        uses: actions/upload-artifact@v3
+        with:
+          name: Naukri-screensots
+          path: 
+            01.png
+            02.png
+            03.png
+
+         
+          
         
