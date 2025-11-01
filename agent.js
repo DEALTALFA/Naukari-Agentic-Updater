@@ -1,9 +1,12 @@
-const puppeteer = require('puppeteer');
-require('dotenv').config();
+const puppeteer = require('puppeteer-core');
+
 
 async function updateNaukri() {
-  const browser = await puppeteer.launch({ headless: true });
-    const page = await browser.newPage();
+  const browser = await puppeteer.launch({ 
+  executablePath: 'user/bin/chromium-browser',
+  
+  headless: true });
+  const page = await browser.newPage();
       await page.goto('https://www.naukri.com/mnjuser/profile');
 
         await page.type('#usernameField', process.env.NAUKRI_USER);
