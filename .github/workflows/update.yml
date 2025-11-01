@@ -1,11 +1,11 @@
 name : update Naukri Profile
 on:
         schedule:
-          cron:"*/1****"
+          -cron:"*/1****"
         workflow_dispatch:
-            jobs:
-                                update:
-                                  runs-on:ubuntu-latest                                                                                                     
+jobs:
+  update:
+    runs-on:ubuntu-latest                                                                                                     
 steps:
                                                 -name: Checkout repository
                                                 uses: actions/checkout@v3
