@@ -5,9 +5,9 @@ async function updateNaukri() {
   const page = await browser.newPage();
 
   await page.goto('https://www.naukri.com/mnjuser/profile');
-  await page.fill('//*[@id="usernameField"]',  process.env.NAUKRI_USER);
-  await page.fill('//*[@id="passwordField"]',  process.env.NAUKRI_PASS);
-  await page.click('#saveHeadline');
+   await page.fill('#usernameField', process.env.NAUKRI_USER);
+          await page.fill('#passwordField', process.env.NAUKRI_PASS);
+            await page.click('#loginButton');
 
  await page.click('#loginButton');
   page.waitForSelector;
