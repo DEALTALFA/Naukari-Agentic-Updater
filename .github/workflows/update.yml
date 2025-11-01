@@ -22,4 +22,4 @@ steps:
                                                 run : node agent.js
                                                 env:
                                                  NAUKRI_USER: "${{secrets.NAUKRI_USER}}"
-                                                  NAUKRI_PASS: "${{secrets.NAUKRI_PASS}}"
+                                                NAUKRI_PASS: "${{secrets.NAUKRI_PASS}}"
