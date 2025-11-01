@@ -1,9 +1,9 @@
-const puppeteer = require('puppeteer');
+import { launch } from 'puppeteer';
 //import puppeteer from puppeteer;
 
 
 async function updateNaukri() {
-  const browser = await puppeteer.launch({ 
+  const browser = await launch({ 
     headless: true,
     args:['--no-sandbox','--disable-setuid-sandbox'],
   executablePath: process.env.PUPPETEER_Executable_PATH ||'/usr/bin/chromium'||'/snap/bin/chromium' 
