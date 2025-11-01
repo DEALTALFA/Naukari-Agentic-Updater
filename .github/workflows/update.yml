@@ -1,4 +1,5 @@
 name: Update Naukri Profile
+
 on:
   schedule:
       - cron: "*/1 * * * *"  # Runs every 1 minute
