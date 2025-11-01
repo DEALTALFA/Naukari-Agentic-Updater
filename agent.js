@@ -1,11 +1,13 @@
 //const puppeteer = require('puppeteer-core');
+import puppeteer from puppeteer;
 
 
 async function updateNaukri() {
   const browser = await puppeteer.launch({ 
     headless: true,
     args:['--no-sandbox','--disable-setuid-sandbox'],
- // executablePath: process.env.PUPPETEER_Executable_PATH ||'/user/bin/chromium-browser',
+  executablePath: process.env.PUPPETEER_Executable_PATH ||'/usr/bin/chromium'||'/snap/bin/chromium' 
+  ||'/user/bin/chromium-browser',
   
   });
   const page = await browser.newPage();
