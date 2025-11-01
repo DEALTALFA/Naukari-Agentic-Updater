@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer-core');
 
 async function updateNaukri() {
   const browser = await puppeteer.launch({ 
-    headless: true
+    headless: true,
     args:['--no-sandbox','--disable-setuid-sandbox'],
   executablePath: process.env.PUPPETEER_Executable_PATH ||'/user/bin/chromium-browser',
   
