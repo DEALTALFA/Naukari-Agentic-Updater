@@ -1,5 +1,5 @@
-//const puppeteer = require('puppeteer-core');
-import puppeteer from puppeteer;
+const puppeteer = require('puppeteer');
+//import puppeteer from puppeteer;
 
 
 async function updateNaukri() {
