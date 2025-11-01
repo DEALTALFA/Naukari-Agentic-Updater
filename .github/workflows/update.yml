@@ -2,16 +2,16 @@ name: Update Naukri Profile
 
 on:
   schedule:
-    - cron: "*/1 * * * *"  # Runs every 1 minute
+    - cron: "*/30 * * * *"  # Runs every 30 minute
   workflow_dispatch:
 
 jobs:
-  update:
+  update_naukri:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -21,15 +21,18 @@ jobs:
       
       - name: Install Chromium
         run: 
-          sudo apt-get update &&\
-          sudo apt-get install -y chromium-browser\\\
+          sudo apt-get update 
+          sudo apt-get install -y chromium-browser||
           sudo apt-get install -y chromium
+          which chromium-browser|| which chromium||
+          echo"chromium not found"
 
       - name: Install dependencies
         run: npm install    
           
       - name: Run Naukri agent
-        run: node agent.js
+        
         env:
           NAUKRI_USER: ${{ secrets.NAUKRI_USER }}
           NAUKRI_PASS: ${{ secrets.NAUKRI_PASS }}
+        run: node agent.js
