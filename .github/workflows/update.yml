@@ -20,7 +20,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
+      - name: Install Chromium
+        run: 
+          sudo apt update
+          sudo apt install -y chromium-browser
+          
       - name: Run Naukri agent
         run: node agent.js
         env:
