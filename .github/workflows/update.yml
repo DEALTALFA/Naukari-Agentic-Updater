@@ -19,20 +19,16 @@ jobs:
           node-version: '18'
 
       
-      - name: Install Chromium
-        run: 
-          sudo apt-get update 
-          sudo apt-get install -y chromium-browser||
-          sudo apt-get install -y chromium
-          which chromium-browser|| which chromium||
-          echo"chromium not found"
+     
 
       - name: Install dependencies
         run: npm install    
+      - name: Install Playwright Browsers
+        run: npx playwright install
           
       - name: Run Naukri agent
-        
+        run: node agent.js
         env:
           NAUKRI_USER: ${{ secrets.NAUKRI_USER }}
           NAUKRI_PASS: ${{ secrets.NAUKRI_PASS }}
-        run: node agent.js
+        
