@@ -9,8 +9,8 @@ async function updateNaukri() {
  await page.goto('https://www.naukri.com/nlogin/login', { waitUntil: 'domcontentloaded' });
  await page.waitForTimeout(3000);
  
- await page.waitForSelector('//*[@id="usernameField"]', { timeout: 60000 });
- await page.fill('//*[@id="usernameField"]"]', process.env.NAUKRI_USER);
+ await page.waitForSelector("//*[@id='usernameField']", { timeout: 60000 });
+ await page.fill("//*[@id='usernameField']", process.env.NAUKRI_USER);
  console.log("This message will appear in the browser's developer console.");
  
  await page.waitForSelector('input[placeholder="Enter your password"]', { timeout: 60000 });
