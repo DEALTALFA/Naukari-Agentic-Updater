@@ -3,9 +3,11 @@ const puppeteer = require('puppeteer-core');
 
 async function updateNaukri() {
   const browser = await puppeteer.launch({ 
-  executablePath: 'user/bin/chromium-browser',
+    headless: true
+    args:['--no-sandbox','--disable-setuid-sandbox'],
+  executablePath: process.env.PUPPETEER_Executable_PATH ||'/user/bin/chromium-browser',
   
-  headless: true });
+  });
   const page = await browser.newPage();
       await page.goto('https://www.naukri.com/mnjuser/profile');
 
