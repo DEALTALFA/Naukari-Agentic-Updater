@@ -4,14 +4,10 @@ async function updateNaukri() {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
   
-await page.setExtraHTTPHeaders({
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/114 Safari/537.36'
-      
-});
-await page.goto('https://www.naukri.com/login', { waitUntil: 'networkidle' });
-  //await page.goto('https://www.naukri.com/mnjuser/profile');
+ 
+  //await page.goto('https://www.naukri.com/');
 await page.waitForTimeout(2000);
-await page.goto('https://www.naukri.com/login');
+
 //  await page.goto('https://www.naukri.com/nlogin/login', { waitUntil: 'domcontentloaded' });
  await page.waitForTimeout(3000);
  await page.screenshot({path: "01.png"});
