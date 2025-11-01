@@ -5,7 +5,7 @@ async function updateNaukri() {
   const page = await browser.newPage();
   
  
-  //await page.goto('https://www.naukri.com/');
+  await page.goto('https://www.naukri.com/');
 await page.waitForTimeout(2000);
 
 //  await page.goto('https://www.naukri.com/nlogin/login', { waitUntil: 'domcontentloaded' });
