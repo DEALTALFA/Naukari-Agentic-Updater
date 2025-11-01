@@ -7,16 +7,16 @@ jobs:
   update:
     runs-on:ubuntu-latest                                                                                                     
     steps:
-    -name: Checkout repository
-      uses: actions/checkout@v3
+      -name: Checkout repository
+       uses: actions/checkout@v3
 
-    -name: Set up Node.ja
-      uses: actions/setup-node@v3
-      with: 
+      -name: Set up Node.ja
+       uses: actions/setup-node@v3
+       with: 
         node-version:'18'
 
-    -name: Install dependencies
-     run: npm install
+      -name: Install dependencies
+       run: npm install
 
     -name: Run naukari agent
      run : node agent.js
