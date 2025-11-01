@@ -1,28 +1,26 @@
-name: Update Naukri Profile
-
+name : update Naukri Profile
 on:
-  schedule:
-      - cron: "*/1 * * * *"  # Runs every 1 minute
-        workflow_dispatch:
+        schedule:
+                -cron:"*/1****"
+                workflow_dispatch:
+                        jobs:
+                                update:
+                                        runs-on:ubuntu-latest
+                                        steps:
+                                                -name: Checkout repository
+                                                uses: actions/checkout@v3
 
-        jobs:
-          update:
-              runs-on: ubuntu-latest
+                                                -name: Set up Node.ja
+                                                uses: actions/setup-node@v3
 
-                  steps:
-                        - name: Checkout repository
-                                uses: actions/checkout@v3
+                                                with:
+                                                        node-version:'18'
 
-                                      - name: Set up Node.js
-                                              uses: actions/setup-node@v3
-                                                      with:
-                                                                node-version: '18'
+                                                        -name: Install dependencies
+                                                        run: npm install
 
-                                                                      - name: Install dependencies
-                                                                              run: npm install
-
-                                                                                    - name: Run Naukri agent
-                                                                                            run: node agent.js
-                                                                                                    env:
-                                                                                                              NAUKRI_USER: ${{ secrets.NAUKRI_USER }}
-                                                                                                                        NAUKRI_PASS: ${{ secrets.NAUKRI_PASS }}
+                                                        -name: Run naukari agent
+                                                        run : node agent.js
+                                                        env:
+                                                                NAUKRI_USER: ${{secrets.NAUKRI_USER}}
+                                                                NAUKRI_PASS: ${{secrets.NAUKRI_PASS}}
