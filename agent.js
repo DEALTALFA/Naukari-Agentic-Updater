@@ -4,20 +4,25 @@ async function updateNaukri() {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
 
-  await page.goto('https://www.naukri.com/mnjuser/profile');
-  console.log("ad");
-  
-  await page.waitForSelector('#usernameField');
-   await page.fill('#usernameField', process.env.NAUKRI_USER);
-          await page.fill('#passwordField', process.env.NAUKRI_PASS);
-            await page.click('#loginButton');
+  //await page.goto('https://www.naukri.com/mnjuser/profile');
 
- await page.click('#loginButton');
-  page.waitForSelector;
+ await page.goto('https://www.naukri.com/nlogin/login', { waitUntil: 'domcontentloaded' });
+ await page.waitForTimeout(3000);
+ 
+ await page.waitForSelector('input[placeholder="Enter your active Email ID / Username"]', { timeout: 60000 });
+ await page.fill('input[placeholder="Enter your active Email ID / Username"]', process.env.NAUKRI_USER);
+ 
+ await page.waitForSelector('input[placeholder="Enter your password"]', { timeout: 60000 });
+ await page.fill('input[placeholder="Enter your password"]', process.env.NAUKRI_PASS);
+ 
+ await page.click('button[type="submit"]');
+ await page.waitForTimeout(5000); await page.waitForSelector('#resumeHeadline');
+  await page.click('#resumeHeadline');
 
-                await page.goto('https://www.naukri.com/mnjuser/profile/edit');
-                  await page.fill('#resumeHeadline', 'Updated at ' + new Date().toISOString());
-                    await page.click('#saveButton');
+  await page.waitForSelector('#resumeHeadlineTxt');
+  await page.fill('#resumeHeadlineTxt', 'passionForField');
+
+  await page.click('#saveHeadline');
 
   await browser.close();
 }
