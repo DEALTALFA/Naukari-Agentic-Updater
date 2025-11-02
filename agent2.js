@@ -1,16 +1,25 @@
+// agent.js
 const { chromium } = require('playwright-extra');
 const stealth = require('playwright-extra-plugin-stealth')();
 chromium.use(stealth);
 
-(async () => {
+async function updateNaukri() {
   const browser = await chromium.launch({
     headless: false,
     args: [
       '--no-sandbox',
-      '--disable-blink-features=AutomationControlled',
       '--disable-setuid-sandbox',
       '--disable-dev-shm-usage',
+      '--disable-blink-features=AutomationControlled',
+      '--disable-web-security',
+      '--disable-features=IsolateOrigins,site-per-process',
     ],
+    // Optional proxy setup (uncomment and fill if needed)
+    // proxy: {
+    //   server: 'http://your-proxy:port',
+    //   username: 'yourUser',
+    //   password: 'yourPass'
+    // }
   });
 
   const context = await browser.newContext({
@@ -32,14 +41,21 @@ chromium.use(stealth);
   });
 
   try {
-    await page.goto('https://www.Linkedin.com', { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await page.goto('https://www.naukri.com', { waitUntil: 'domcontentloaded', timeout: 30000 });
+
+    // Simulate human-like behavior
     await page.mouse.move(100, 100);
     await page.waitForTimeout(Math.floor(Math.random() * 1000 + 500));
+
+    // Screenshot for validation
     await page.screenshot({ path: '01.png' });
-    console.log('✅ Page loaded and screenshot saved.');
+
+    console.log('✅ Naukri page loaded and screenshot captured.');
   } catch (error) {
-    console.error('❌ Access blocked:', error.message);
+    console.error('❌ Error loading Naukri:', error.message);
   } finally {
     await browser.close();
   }
-})();
+}
+
+updateNaukri();
