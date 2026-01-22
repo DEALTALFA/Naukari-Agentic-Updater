@@ -57,6 +57,7 @@ const page = await context.newPage();
 await page.click('text=Login');
   await page.mouse.move(200, 300);
 await page.waitForTimeout(1500);
+  await page.screenshot({path: "03.png"});
 await page.keyboard.type('your@email.com', { delay: 120 });
 
   await browser.close();
