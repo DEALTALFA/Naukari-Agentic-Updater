@@ -41,9 +41,10 @@ async function updateNaukri() {
 });
 const page = await context.newPage();
  await page.screenshot({path: "01.png"});
-  await page.goto('https://www.naukri.com/', {
+  await page.goto('https://www.google.com/', {
   waitUntil: 'networkidle'
 });
+  await page.navigate
    await page.waitForTimeout(6000);
 await page.screenshot({path: "02.png"});
 
