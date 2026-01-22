@@ -7,7 +7,7 @@ on:
 
 jobs:
   update_naukri:
-    runs-on: [self-hosted, windows-latest, x64]
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
@@ -33,10 +33,11 @@ jobs:
           NAUKRI_PASS: ${{ secrets.NAUKRI_PASS }}
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
+        if: ${{ always() }}
         with:
           name: Naukri-screensots
-          path: 
-            01.png
+          path: |
+            **/*.png
             
 
          
