@@ -46,11 +46,13 @@ const page = await context.newPage();
 });
  
  await page.screenshot({path: "01.png"});
-    await page.goto('https://www.naukri.com/', {
-  waitUntil: 'networkidle'
-});
+     await page.goto('https://www.naukri.com/');
+ await page.screenshot({path: "02.png"});
+// , {
+//   waitUntil: 'networkidle'
+// });
    await page.waitForTimeout(6000);
-await page.screenshot({path: "02.png"});
+
 
 await page.click('text=Login');
   await page.mouse.move(200, 300);
