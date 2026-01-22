@@ -37,7 +37,8 @@ jobs:
         with:
           name: Naukri-screensots
           path: 
-            *.png
+            01.png
+            02.png
             
 
          
