@@ -40,11 +40,15 @@ async function updateNaukri() {
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 });
 const page = await context.newPage();
- await page.screenshot({path: "01.png"});
+ // await page.screenshot({path: "01.png"});
   await page.goto('https://www.google.com/', {
   waitUntil: 'networkidle'
 });
-  await page.navigate
+ 
+ await page.screenshot({path: "01.png"});
+    await page.goto('https://www.naukri.com/', {
+  waitUntil: 'networkidle'
+});
    await page.waitForTimeout(6000);
 await page.screenshot({path: "02.png"});
 
