@@ -7,7 +7,7 @@ on:
 
 jobs:
   update_naukri:
-    runs-on: [self-hosted, windows-latest, x64]
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
