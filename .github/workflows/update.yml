@@ -36,8 +36,8 @@ jobs:
         if: ${{ always() }}
         with:
           name: Naukri-screensots
-          path: 
-            01.png
+          path: |
+            **/*.png
             
 
          
