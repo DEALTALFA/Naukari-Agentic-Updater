@@ -5,10 +5,10 @@ async function updateNaukri() {
   const page = await browser.newPage();
   
  
-  await page.goto('https://www.Linkedin.com/');
+ // await page.goto('https://www.Linkedin.com/');
 await page.waitForTimeout(2000);
 
-//  await page.goto('https://www.naukri.com/nlogin/login', { waitUntil: 'domcontentloaded' });
+  await page.goto('https://www.naukri.com/nlogin/login', { waitUntil: 'domcontentloaded' });
  await page.waitForTimeout(3000);
  await page.screenshot({path: "01.png"});
 //  await page.waitForSelector("//*[@id='usernameField']", { timeout: 60000 });
