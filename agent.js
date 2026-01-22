@@ -43,7 +43,7 @@ const page = await context.newPage();
   await page.goto('https://www.naukri.com/', {
   waitUntil: 'networkidle'
 });
-   await page.waitForTimeout(3000);
+   await page.waitForTimeout(6000);
 await page.screenshot({path: "01.png"});
 
 await page.click('text=Login');
