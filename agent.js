@@ -58,7 +58,17 @@ await page.click('text=Login');
   await page.mouse.move(200, 300);
 await page.waitForTimeout(1500);
   await page.screenshot({path: "03.png"});
-await page.keyboard.type('your@email.com', { delay: 120 });
+//await page.keyboard.type('anrai0410@gmail.com', { delay: 120 });
+ //  await page.screenshot({path: "03.png"});
+   await page.waitForSelector("//*[@id='usernameField']", { timeout: 60000 });
+ await page.fill("//*[@id='usernameField']", process.env.NAUKRI_USER);
+  await page.screenshot({path:"04.png"});
+  console.log("This message will appear in the browser's developer console.");
+ 
+  await page.waitForSelector('input[placeholder="Enter your password"]', { timeout: 60000 });
+  await page.fill('input[placeholder="Enter your password"]', process.env.NAUKRI_PASS);
+  await page.screenshot({path:"05.png"});
+  await page.click('button[type="submit"]');
 
   await browser.close();
 }
