@@ -60,8 +60,8 @@ await page.waitForTimeout(1500);
   await page.screenshot({path: "03.png"});
 //await page.keyboard.type('anrai0410@gmail.com', { delay: 120 });
  //  await page.screenshot({path: "03.png"});
-   await page.waitForSelector("//*[@id='usernameField']", { timeout: 60000 });
- await page.fill("//*[@id='usernameField']", process.env.NAUKRI_USER);
+   await page.waitForSelector("//*[@placeholder='Enter your active Email ID / Username']", { timeout: 60000 });
+ await page.fill("//*[@placeholder='Enter your active Email ID / Username']", process.env.NAUKRI_USER);
   await page.screenshot({path:"04.png"});
   console.log("This message will appear in the browser's developer console.");
  
