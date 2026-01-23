@@ -71,7 +71,7 @@ await page.waitForTimeout(1500);
   await page.click('button[type="submit"]');
  await page.waitForTimeout(6000);
  await page.screenshot({path:"06.png"});
- await page.click('//*[text()='View']');
+ await page.click(' div.view-profile-wrapper > a');
  await page.screenshot({path:"07.png"});
 
   await browser.close();
