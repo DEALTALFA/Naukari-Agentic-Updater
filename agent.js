@@ -69,6 +69,10 @@ await page.waitForTimeout(1500);
   await page.fill('input[placeholder="Enter your password"]', process.env.NAUKRI_PASS);
   await page.screenshot({path:"05.png"});
   await page.click('button[type="submit"]');
+ await page.waitForTimeout(6000);
+ await page.screenshot({path:"06.png"});
+ await page.click('//*[text()='View']');
+ await page.screenshot({path:"07.png"});
 
   await browser.close();
 }
