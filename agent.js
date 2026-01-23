@@ -73,7 +73,7 @@ await page.waitForTimeout(1500);
  // await page.fill('input[placeholder="Enter your password"]', process.env.NAUKRI_PASS);
    await page.fill('input[placeholder="Enter your password"]', "Aditya2026");
   await page.waitForTimeout(6000);
-   await page.click('//*[text()='Show']');
+   await page.click("//*[text()='Show']");
 
 //*[text()='Show']
  console.log(process.env.NAUKRI_PASS);
