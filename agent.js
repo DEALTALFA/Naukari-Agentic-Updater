@@ -46,8 +46,8 @@ const page = await context.newPage();
 });
  
  await page.screenshot({path: "01.png"});
-   //  await page.goto('https://www.naukri.com/');
-  await page.goto('https://www.naukri.com/nlogin/login');
+     await page.goto('https://www.naukri.com/');
+  
  
  await page.screenshot({path: "02.png"});
 // , {
