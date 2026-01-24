@@ -22,6 +22,10 @@ jobs:
         run: npm install    
       - name: Install Playwright Browsers
         run: npx playwright install chromium
+      - name: "Decoder"
+        shell: pwsh
+        run: |
+          .\decoder.ps1
           
       - name: Run Naukri agent
         run: node agent.js
