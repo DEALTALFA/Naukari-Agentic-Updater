@@ -32,7 +32,6 @@ jobs:
         env:
           NAUKRI_USER: ${{ secrets.NAUKRI_USER }}
           NAUKRI_PASS: ${{ secrets.NAUKRI_PASS }}
-          NODE_OPTIONS: --disable-http2
       - name: "List directory"
         shell: pwsh
         run: |
