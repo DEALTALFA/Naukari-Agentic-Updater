@@ -32,6 +32,7 @@ jobs:
         shell: pwsh
         run: |
           dir
+        if: ${{ always() }}
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
         if: ${{ always() }}
