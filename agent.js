@@ -47,6 +47,7 @@ const page = await context.newPage();
   await page.goto('https://www.google.com/', {
   waitUntil: 'networkidle'
 });
+
 async function injectCookies(context) {
   // Read cookies from the file
   const cookies = JSON.parse(fs.readFileSync('cookies.json'));
@@ -67,54 +68,54 @@ await injectCookies(context);
 // , {
 //   waitUntil: 'networkidle'
 // });
-   await page.waitForTimeout(6000);
+//    await page.waitForTimeout(6000);
 
 
-await page.click('text=Login');
-  await page.mouse.move(200, 300);
-await page.waitForTimeout(1500);
-  await page.screenshot({path: "03.png"});
-//await page.keyboard.type('anrai0410@gmail.com', { delay: 120 });
- //  await page.screenshot({path: "03.png"});
-   await page.waitForSelector("//*[@placeholder='Enter your active Email ID / Username']", { timeout: 60000 });
-// await page.fill("//*[@placeholder='Enter your active Email ID / Username']", process.env.NAUKRI_USER);
-  await page.fill("//*[@placeholder='Enter your active Email ID / Username']", "anrai0410@gmail.com");
+// await page.click('text=Login');
+//   await page.mouse.move(200, 300);
+// await page.waitForTimeout(1500);
+//   await page.screenshot({path: "03.png"});
+// //await page.keyboard.type('anrai0410@gmail.com', { delay: 120 });
+//  //  await page.screenshot({path: "03.png"});
+//    await page.waitForSelector("//*[@placeholder='Enter your active Email ID / Username']", { timeout: 60000 });
+// // await page.fill("//*[@placeholder='Enter your active Email ID / Username']", process.env.NAUKRI_USER);
+//   await page.fill("//*[@placeholder='Enter your active Email ID / Username']", "anrai0410@gmail.com");
 
- await page.click("//button[@type='submit']");
- console.log(process.env.NAUKRI_USER);
-  await page.screenshot({path:"04.png"});
-  console.log("This message will appear in the browser's developer console.");
- await page.fill("//*[@placeholder='Enter your active Email ID / Username']", "anrai0410@gmail.com");
-  await page.waitForSelector('input[placeholder="Enter your password"]', { timeout: 60000 });
- // await page.fill('input[placeholder="Enter your password"]', process.env.NAUKRI_PASS);
-   await page.fill('input[placeholder="Enter your password"]', "Aditya2026");
-  await page.waitForTimeout(6000);
-   await page.click("//*[text()='Show']");
-await page.waitForTimeout(6000);
- console.log(process.env.NAUKRI_PASS);
-  await page.screenshot({path:"05.png"});
-   slowMo: 100
-//  await page.click('button[type="submit"]');
- await page.click("//button[@type='submit']");
-  await page.mouse.move(200, 300);
-await page.waitForTimeout(1500);
+//  await page.click("//button[@type='submit']");
+//  console.log(process.env.NAUKRI_USER);
+//   await page.screenshot({path:"04.png"});
+//   console.log("This message will appear in the browser's developer console.");
+//  await page.fill("//*[@placeholder='Enter your active Email ID / Username']", "anrai0410@gmail.com");
+//   await page.waitForSelector('input[placeholder="Enter your password"]', { timeout: 60000 });
+//  // await page.fill('input[placeholder="Enter your password"]', process.env.NAUKRI_PASS);
+//    await page.fill('input[placeholder="Enter your password"]', "Aditya2026");
+//   await page.waitForTimeout(6000);
+//    await page.click("//*[text()='Show']");
+// await page.waitForTimeout(6000);
+//  console.log(process.env.NAUKRI_PASS);
+//   await page.screenshot({path:"05.png"});
+//    slowMo: 100
+// //  await page.click('button[type="submit"]');
+//  await page.click("//button[@type='submit']");
+//   await page.mouse.move(200, 300);
+// await page.waitForTimeout(1500);
 
-await saveCookies(context);
- await page.waitForTimeout(6000);
- await page.screenshot({path:"06.png"});
+// await saveCookies(context);
+//  await page.waitForTimeout(6000);
+//  await page.screenshot({path:"06.png"});
  
 
-async function saveCookies(context) {
-  const cookies = await context.cookies();
-  console.log(cookies);
-  fs.writeFileSync('cookies.json', JSON.stringify(cookies, null, 2));
+// async function saveCookies(context) {
+//   const cookies = await context.cookies();
+//   console.log(cookies);
+//   fs.writeFileSync('cookies.json', JSON.stringify(cookies, null, 2));
   
-}
+// }
 
-// Example usage:
-await saveCookies(context);
-// await page.click('div.view-profile-wrapper > a');
- await page.screenshot({path:"07.png"});
+// // Example usage:
+// await saveCookies(context);
+// // await page.click('div.view-profile-wrapper > a');
+//  await page.screenshot({path:"07.png"});
 
   await browser.close();
 }
