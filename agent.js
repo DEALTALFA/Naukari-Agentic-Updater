@@ -1,5 +1,8 @@
 const { chromium } = require('playwright');
 
+
+const fs = require('fs');
+
 async function updateNaukri() {
  // const browser = await chromium.launch({ headless: true });
   //const page = await browser.newPage();
@@ -44,6 +47,17 @@ const page = await context.newPage();
   await page.goto('https://www.google.com/', {
   waitUntil: 'networkidle'
 });
+async function injectCookies(context) {
+  // Read cookies from the file
+  const cookies = JSON.parse(fs.readFileSync('cookies.json'));
+
+  // Add them into the browser context
+  await context.addCookies(cookies);
+}
+
+// Example usage before visiting Naukri:
+await injectCookies(context);
+
  
  await page.screenshot({path: "01.png"});
      await page.goto('https://www.naukri.com/');
@@ -84,8 +98,21 @@ await page.waitForTimeout(6000);
  await page.click("//button[@type='submit']");
   await page.mouse.move(200, 300);
 await page.waitForTimeout(1500);
+
+await saveCookies(context);
  await page.waitForTimeout(6000);
  await page.screenshot({path:"06.png"});
+ 
+
+async function saveCookies(context) {
+  const cookies = await context.cookies();
+  console.log(cookies);
+  fs.writeFileSync('cookies.json', JSON.stringify(cookies, null, 2));
+  
+}
+
+// Example usage:
+await saveCookies(context);
 // await page.click('div.view-profile-wrapper > a');
  await page.screenshot({path:"07.png"});
 
