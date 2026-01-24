@@ -34,7 +34,9 @@ async function updateNaukri() {
 //   await page.click('#saveHeadline');
     const browser = await chromium.launch({
   headless: false,
-  slowMo: 100
+  slowMo: 100,
+    args: ['--disable-http2']
+
 });
 
   
