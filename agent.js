@@ -79,7 +79,10 @@ await page.waitForTimeout(1500);
  console.log(process.env.NAUKRI_PASS);
   await page.screenshot({path:"05.png"});
    slowMo: 100
-  await page.click('button[type="submit"]');
+//  await page.click('button[type="submit"]');
+ await page.click('button[type="submit"]');
+  await page.mouse.move(200, 300);
+await page.waitForTimeout(1500);
  await page.waitForTimeout(6000);
  await page.screenshot({path:"06.png"});
 // await page.click('div.view-profile-wrapper > a');
