@@ -63,13 +63,11 @@ await injectCookies(context);
 
  
  await page.screenshot({path: "01.png"});
-     await page.goto('https://www.naukri.com/');
+     await page.goto('https://www.naukri.com/',
   
- 
- await page.screenshot({path: "02.png"});
-// , {
-//   waitUntil: 'networkidle'
-// });
+  {
+  waitUntil: 'networkidle'
+}); await page.screenshot({path: "02.png"});
 //    await page.waitForTimeout(6000);
 
 
