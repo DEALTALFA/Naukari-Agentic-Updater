@@ -82,7 +82,7 @@ await page.waitForTimeout(1500);
   await page.screenshot({path:"05.png"});
    slowMo: 100
 //  await page.click('button[type="submit"]');
- await page.click('button[type="submit"]');
+ await page.click("//button[@type='submit']");
   await page.mouse.move(200, 300);
 await page.waitForTimeout(1500);
  await page.waitForTimeout(6000);
