@@ -83,7 +83,13 @@ await page.screenshot({path: "03.png"});
   await page.click('div.view-profile-wrapper > a');
  await page.waitForTimeout(6000);
   await page.screenshot({path:"04.png"});
-
+ await page.click('//*[@id="lazyResumeHead"]/div/div/div[1]/span[2]');
+ await page.waitForTimeout(6000);
+  await page.screenshot({path:"05.png"});
+ await page.click("/button[text()='Save']");
+  await page.waitForTimeout(6000);
+  await page.screenshot({path:"06.png"});
+ 
 // await page.click('text=Login');
 //   await page.mouse.move(200, 300);
 // await page.waitForTimeout(1500);
