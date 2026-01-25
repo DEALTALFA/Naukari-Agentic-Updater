@@ -78,7 +78,7 @@ await injectCookies(context);
 }
  await page.screenshot({path: "02.png"});
     await page.waitForTimeout(10000);
-
+await page.screenshot({path: "03.png"});
 
 // await page.click('text=Login');
 //   await page.mouse.move(200, 300);
