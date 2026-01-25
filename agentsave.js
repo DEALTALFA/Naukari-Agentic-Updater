@@ -41,7 +41,7 @@ await page.waitForTimeout(1500);
  await page.fill("//*[@placeholder='Enter your active Email ID / Username']", "anrai0410@gmail.com");
   await page.waitForSelector('input[placeholder="Enter your password"]', { timeout: 60000 });
  // await page.fill('input[placeholder="Enter your password"]', process.env.NAUKRI_PASS);
-   await page.fill('input[placeholder="Enter your password"]', "Aditya2026");
+   await page.fill('input[placeholder="Enter your password"]', "Adi");
   await page.waitForTimeout(6000);
    await page.click("//*[text()='Show']");
 await page.waitForTimeout(6000);
