@@ -86,7 +86,7 @@ await page.screenshot({path: "03.png"});
  await page.click('//*[@id="lazyResumeHead"]/div/div/div[1]/span[2]');
  await page.waitForTimeout(6000);
   await page.screenshot({path:"05.png"});
- await page.click("/button[text()='Save']");
+ await page.click("//button[text()='Save']");
   await page.waitForTimeout(6000);
   await page.screenshot({path:"06.png"});
  
