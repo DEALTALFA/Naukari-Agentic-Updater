@@ -66,9 +66,9 @@ await injectCookies(context);
      await page.goto('https://www.naukri.com/',
   
   {
-  waitUntil: 'networkidle'
+  //waitUntil: 'networkidle'
 }); await page.screenshot({path: "02.png"});
-//    await page.waitForTimeout(6000);
+    await page.waitForTimeout(10000);
 
 
 // await page.click('text=Login');
