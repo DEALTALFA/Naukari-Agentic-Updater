@@ -63,11 +63,20 @@ await injectCookies(context);
 
  
  await page.screenshot({path: "01.png"});
-     await page.goto('https://www.naukri.com/',
+//      await page.goto('https://www.naukri.com/',
   
-  {
-  //waitUntil: 'networkidle'
-}); await page.screenshot({path: "02.png"});
+//   {
+//   //waitUntil: 'networkidle'
+// });
+ for (let i = 0; i < 3; i++) {
+  try {
+    await page.goto("https://www.naukri.com/", { waitUntil: "domcontentloaded" });
+    break;
+  } catch (err) {
+    console.log(`Retry ${i+1} failed`);
+  }
+}
+ await page.screenshot({path: "02.png"});
     await page.waitForTimeout(10000);
 
 
