@@ -1,0 +1,4 @@
+cookies.json
+**/*.env
+node_modules
+**/*.png

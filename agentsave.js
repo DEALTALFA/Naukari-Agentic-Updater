@@ -1,6 +1,6 @@
+require('dotenv').config()
 const { chromium } = require('playwright');
-
-
+const os=require('os')
 const fs = require('fs');
 
 async function updateNaukri() {
@@ -17,7 +17,7 @@ async function updateNaukri() {
 });
 
 
- 
+ const page=await context.newPage()
  await page.screenshot({path: "01.png"});
      await page.goto('https://www.naukri.com/');
   
@@ -51,17 +51,6 @@ await saveCookies(context);
 
 const { exec } = require('child_process');
 
-exec('[Convert]::ToBase64String([System.IO.File]::ReadAllBytes("C:\\Users\\ADITYA\\OneDrive\\Desktop\\Naukari-Agentic-Updater\\cookies.json"))|Out-File -FilePath "C:\\Users\\ADITYA\\OneDrive\\Desktop\\Naukari-Agentic-Updater\\encode.json"', {'shell':'powershell.exe'}, (error, stdout, stderr) => {
-  if (error) {
-    console.error(`exec error: ${error}`);
-    return;
-  }
-  if (stderr) {
-    console.error(`stderr: ${stderr}`);
-    return;
-  }
-  console.log(`stdout: ${stdout}`);
-});
  await page.waitForTimeout(6000);
  await page.screenshot({path:"06.png"});
  
@@ -75,6 +64,34 @@ async function saveCookies(context) {
 
 // Example usage:
 await saveCookies(context);
+if (os.type()=='Linux'){
+	exec('base64 $(pwd)/cookies.json > $(pwd)/encode.json && base64 -d $(pwd)/encode.json >$(pwd)/cookies.json',{'shell':'bash'},(error,stdout,stderr) =>{
+	if (error) {
+		console.error(`exec error: ${error}`);
+		return;
+	}
+	if (stderr) {
+		console.error(`stderr: ${stderr}`);
+		return;
+	}
+		console.log(`stdout: ${stdout}`);
+		console.log('Made file at',process.cwd())
+	});
+}
+else{
+exec('[Convert]::ToBase64String([System.IO.File]::ReadAllBytes("C:\\Users\\ADITYA\\OneDrive\\Desktop\\Naukari-Agentic-Updater\\cookies.json"))|Out-File -FilePath "C:\\Users\\ADITYA\\OneDrive\\Desktop\\Naukari-Agentic-Updater\\encode.json"', {'shell':'powershell.exe'}, (error, stdout, stderr) => {
+  if (error) {
+    console.error(`exec error: ${error}`);
+    return;
+  }
+  if (stderr) {
+    console.error(`stderr: ${stderr}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
+});
+
+}
 // await page.click('div.view-profile-wrapper > a');
  await page.screenshot({path:"07.png"});
 
