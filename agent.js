@@ -81,7 +81,7 @@ await injectCookies(context);
 await page.screenshot({path: "03.png"});
 
 //  await page.click('div.view-profile-wrapper > a');
-   await page.click('//*[text()='View']');
+   await page.click(' div > div.other-info-wrapper > div.view-profile-wrapper > a');
 
  //*[text()='View']
  await page.waitForTimeout(6000);
