@@ -2,12 +2,12 @@ name: Update Naukri Profile
 
 on:
   schedule:
-    - cron: "*/30 * * * *"  # Runs every 30 minute
+    - cron: "*/10 * * * *"  # Runs every 15 minute
   workflow_dispatch:
 
 jobs:
   update_naukri:
-    runs-on: [self-hosted, windows-latest, x64]
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
@@ -18,25 +18,32 @@ jobs:
         with:
           node-version: '18'
 
-      
-     
-
       - name: Install dependencies
         run: npm install    
       - name: Install Playwright Browsers
         run: npx playwright install chromium
+      - name: "Decoder"
+        shell: pwsh
+        run: |
+          .\decoder.ps1
           
       - name: Run Naukri agent
         run: node agent.js
         env:
           NAUKRI_USER: ${{ secrets.NAUKRI_USER }}
           NAUKRI_PASS: ${{ secrets.NAUKRI_PASS }}
+      - name: "List directory"
+        shell: pwsh
+        run: |
+          dir
+        if: ${{ always() }}
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
+        if: ${{ always() }}
         with:
           name: Naukri-screensots
-          path: 
-            01.png
+          path: |
+            **/*.png
             
 
          
