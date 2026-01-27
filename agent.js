@@ -76,6 +76,7 @@ await injectCookies(context);
     console.log(`Retry ${i+1} failed`);
   }
 }
+await page.reload();
  await page.screenshot({path: "02.png"});
     await page.waitForTimeout(10000);
 await page.screenshot({path: "03.png"});
