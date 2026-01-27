@@ -80,8 +80,8 @@ await injectCookies(context);
     await page.waitForTimeout(10000);
 await page.screenshot({path: "03.png"});
 
- await page.click('div.view-profile-wrapper > a');
-   //await page.click(' div > div.other-info-wrapper > div.view-profile-wrapper > a');
+// await page.click('div.view-profile-wrapper > a');
+   await page.click("//a[@href=/mnjuser/profile');
 
  //*[text()='View']
  await page.waitForTimeout(6000);
