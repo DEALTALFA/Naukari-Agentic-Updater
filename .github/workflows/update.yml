@@ -2,7 +2,7 @@ name: Update Naukri Profile
 
 on:
   schedule:
-    - cron: "*/4 * * * *"  # Runs every 4 minute
+    - cron: "*/40  * * * *"  # Runs every 40 minutes
   workflow_dispatch:
 
 permissions:
