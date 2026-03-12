@@ -3,10 +3,13 @@ name: Update Naukri Profile
 on:
   schedule:
     - cron: "*/40  * * * *"  # Runs every 40 minutes
-  workflow_dispatch:
+  workflow_dispatch: 
 
 permissions:
   contents: read
+env:
+  # Opt into Node.js 24 for the runner environment now
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   update_naukri:
@@ -14,12 +17,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
 
       - name: Install dependencies
         run: npm install    
