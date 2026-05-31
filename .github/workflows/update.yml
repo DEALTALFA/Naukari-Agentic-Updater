@@ -25,9 +25,9 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm install
       - name: Install Playwright Browsers
-        run: npx playwright install
+        run: npx playwright install chromium
       - name: Check Playwright Installation
         run: npx playwright --version
       - name: "Decoder"
