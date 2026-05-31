@@ -7,9 +7,9 @@ on:
 
 permissions:
   contents: read
-env:
-  # Opt into Node.js 24 for the runner environment now
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+# env:
+#   # Opt into Node.js 24 for the runner environment now
+#   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   update_naukri:
