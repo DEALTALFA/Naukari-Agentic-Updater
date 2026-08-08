@@ -79,7 +79,7 @@ if (os.type()=='Linux'){
 	});
 }
 else{
-exec('[Convert]::ToBase64String([System.IO.File]::ReadAllBytes("C:\\Users\\ADITYA\\OneDrive\\Desktop\\Naukari-Agentic-Updater\\cookies.json"))|Out-File -FilePath "C:\\Users\\ADITYA\\OneDrive\\Desktop\\Naukari-Agentic-Updater\\encode.json"', {'shell':'powershell.exe'}, (error, stdout, stderr) => {
+exec('[Convert]::ToBase64String([System.IO.File]::ReadAllBytes(\'' + process.cwd() + '/cookies.json\'))|Out-File -FilePath "' + process.cwd() + '/encode.json"', {'shell':'powershell.exe'}, (error, stdout, stderr) => {
   if (error) {
     console.error(`exec error: ${error}`);
     return;
