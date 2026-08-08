@@ -51,11 +51,17 @@ const page = await context.newPage();
 });
 
 async function injectCookies(context) {
-  // Read cookies from the file
-  const cookies = JSON.parse(fs.readFileSync('cookies.json'));
-
-  // Add them into the browser context
-  await context.addCookies(cookies);
+  try {
+    // Read cookies from the file if it exists
+    if (fs.existsSync('cookies.json')) {
+      const cookies = JSON.parse(fs.readFileSync('cookies.json'));
+      await context.addCookies(cookies);
+    } else {
+      console.log('cookies.json not found, proceeding without cookies');
+    }
+  } catch (err) {
+    console.log('Error injecting cookies:', err.message);
+  }
 }
 
 // Example usage before visiting Naukri:
