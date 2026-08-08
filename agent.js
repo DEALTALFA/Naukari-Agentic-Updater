@@ -68,6 +68,7 @@ await injectCookies(context);
 //   {
 //   //waitUntil: 'networkidle'
 // });
+console.log("Navigating to Naukri...");
  for (let i = 0; i < 3; i++) {
   try {
     await page.goto("https://www.naukri.com/", { waitUntil: "domcontentloaded" });
@@ -82,6 +83,7 @@ await page.waitForTimeout(10000);
 await page.screenshot({path: "03.png"});
 await page.waitForTimeout(10000);
 // await page.click('div.view-profile-wrapper > a');
+console.log("Clicking on Jobs...");
 await page.click('(//span[text()="Jobs"])[1]');
 await page.waitForTimeout(3000);
 await page.screenshot({path: "04.png"});
@@ -91,9 +93,11 @@ await page.click('//a[@href="/mnjuser/profile"]');
  //*[text()='View']
 await page.waitForTimeout(6000);
 await page.screenshot({path:"05.png"});
+console.log("Clicking on Resume Headline to update...");
 await page.click('//*[@id="lazyResumeHead"]/div/div/div[1]/span[2]');
 await page.waitForTimeout(6000);
 await page.screenshot({path:"06.png"});
+console.log("Clicking on Save...");
 await page.click("//button[text()='Save']");
 await page.waitForTimeout(6000);
 await page.screenshot({path:"07.png"});
