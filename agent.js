@@ -93,6 +93,11 @@ console.log("Clicking on Jobs...");
 await page.click('(//span[text()="Jobs"])[1]');
 await page.waitForTimeout(3000);
 await page.screenshot({path: "04.png"});
+
+if (await page.locator('//span[contains(.,"₹")]').isVisible()) {
+  console.log("Salary filter is visible, clicking on it...");
+}
+
 await page.click('//img[@href="https://www.naukri.com"]');
 
 await page.click('//a[@href="/mnjuser/profile"]');
@@ -107,7 +112,7 @@ console.log("Clicking on Save...");
 await page.click("//button[text()='Save']");
 await page.waitForTimeout(6000);
 await page.screenshot({path:"07.png"});
- 
+
 // await page.click('text=Login');
 //   await page.mouse.move(200, 300);
 // await page.waitForTimeout(1500);
