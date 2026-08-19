@@ -87,8 +87,9 @@ await page.reload();
 await page.screenshot({path: "02.png"});
 await page.waitForTimeout(10000);
 await page.screenshot({path: "03.png"});
-await page.waitForTimeout(10000);
+// await page.waitForTimeout(10000);
 // await page.click('div.view-profile-wrapper > a');
+await page.waitForSelector('(//span[text()="Jobs"])[1]', {state: 'visible', timeout: 30000 });
 console.log("Clicking on Jobs...");
 await page.click('(//span[text()="Jobs"])[1]');
 await page.waitForTimeout(3000);
@@ -96,6 +97,10 @@ await page.screenshot({path: "04.png"});
 
 if (await page.locator('//span[contains(.,"₹")]').isVisible()) {
   console.log("Salary filter is visible, clicking on it...");
+  await page.click('(//em[@class="naukicon naukicon-ot-pencil"])[3]',{state: 'visible', timeout: 30000});
+  await page.click('//input[@class="currency-input "]',{state: 'visible', timeout: 30000});
+  await page.locator('//input[@class="currency-input "]').clear();
+  await page.click('//button[@type="submit"]',{state: 'visible', timeout: 30000});
 }
 
 await page.click('//img[@href="https://www.naukri.com"]');
@@ -158,6 +163,22 @@ await page.screenshot({path:"07.png"});
 // await saveCookies(context);
 // // await page.click('div.view-profile-wrapper > a');
 //  await page.screenshot({path:"07.png"});
+await page.click('//div[@class="lightbox profileEditDrawer profileUpdatedProLayer model_open flipOpen"]//span[text()="CrossLayer"]',{state: 'visible', timeout: 30000});
+// await page.waitForTimeout(30000000);
+await page.waitForSelector('(//span[text()="Jobs"])[1]', {state: 'visible', timeout: 30000 });
+console.log("Clicking on Jobs at the end...");
+await page.click('(//span[text()="Jobs"])[1]');
+await page.waitForTimeout(3000);
+await page.screenshot({path: "08.png"});
+if (await page.locator('//span[contains(.,"₹")]').isVisible()) {
+  console.log("Salary filter is visible at the end, editing on it...");
+  await page.click('(//em[@class="naukicon naukicon-ot-pencil"])[3]',{state: 'visible', timeout: 30000});
+  await page.click('//input[@class="currency-input "]',{state: 'visible', timeout: 30000});
+  await page.locator('//input[@class="currency-input "]').clear();
+  await page.click('//button[@type="submit"]',{state: 'visible', timeout: 30000});
+  console.log("Expected Salary is removed and updated successfully.");
+  await page.screenshot({path: "09.png"});
+}
 
   await browser.close();
 }
