@@ -30,16 +30,17 @@ jobs:
         run: npx playwright install chromium
       - name: Check Playwright Installation
         run: npx playwright --version
-      - name: "Decoder"
-        shell: pwsh
-        run: |
-          .\decoder.ps1
+      # - name: "Decoder"
+      #   shell: pwsh
+      #   run: |
+      #     .\decoder.ps1
           
       - name: Run Naukri agent
         run: node agent.js
         env:
           NAUKRI_USER: ${{ secrets.NAUKRI_USER }}
           NAUKRI_PASS: ${{ secrets.NAUKRI_PASS }}
+          COOKIE_PASSWORD: ${{ secrets.COOKIE_PASSWORD }}
       - name: "List directory"
         shell: pwsh
         run: |
