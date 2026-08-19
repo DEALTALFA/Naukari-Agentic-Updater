@@ -61,9 +61,9 @@ if (await page.locator('//span[contains(.,"₹")]').isVisible()) {
   await page.click('//button[@type="submit"]',{state: 'visible', timeout: 30000});
 }
 
-await page.click('//img[@href="https://www.naukri.com"]');
+await page.click('//img[@href="https://www.naukri.com"]',{state: 'visible', timeout: 30000});
 
-await page.click('//a[@href="/mnjuser/profile"]');
+await page.click('//a[@href="/mnjuser/profile"]',{state: 'visible', timeout: 30000});
  //*[text()='View']
 await page.waitForTimeout(6000);
 await page.screenshot({path:"05.png"});
