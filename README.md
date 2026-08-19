@@ -1,182 +1,119 @@
-# Naukari-Agentic-Updater
+# Naukri Agentic Updater
 
-
-
-
-Yep — this explains **exactly** why you’re getting *Access Denied on all servers* 😅
-Naukri is blocking you **because of Playwright automation**.
-
-Let’s break it down clearly and fix it.
+Automates Naukri profile updates using Playwright, triggered via GitHub Actions every 40 minutes. Keeps your profile "recently updated" to improve recruiter visibility.
 
 ---
 
-## What’s happening (root cause)
+## What it does
 
-Naukri uses **Akamai Bot Manager + WAF**.
-Your script triggers **multiple bot signals**:
-
-### 🚨 Red flags in your code
-
-1. **Headless browser**
-
-```js
-chromium.launch({ headless: true })
-```
-
-→ Instant bot fingerprint.
-
-2. **Default Playwright fingerprint**
-
-* `navigator.webdriver = true`
-* Missing real browser signals
-* No mouse movement, no typing delays
-
-3. **Direct login URL access**
-
-```js
-https://www.naukri.com/nlogin/login
-```
-
-→ Protected endpoint (high bot sensitivity)
-
-4. **Fast, robotic timing**
-
-```js
-waitForTimeout(2000)
-waitForTimeout(3000)
-```
-
-Once triggered:
-
-* Your **IP gets temporarily blocked**
-* Browser access may also get blocked (same IP)
-* You see the Akamai **Access Denied** page
-
-That’s why even normal browsing broke.
+1. Launches a headful Chromium browser with a real user-agent
+2. Injects encrypted session cookies to skip login
+3. Navigates to Naukri homepage
+4. Opens your profile and saves the Resume Headline (triggers "profile updated")
+5. Clears the Expected Salary filter if visible
+6. Uploads screenshots as artifacts for every run
 
 ---
 
-## Important truth (no sugarcoating)
+## Project Structure
 
-> ❌ **Naukri does NOT allow automation**
->
-> Even advanced Playwright + stealth setups **eventually get blocked**
-
-This is expected behavior, not a bug in your script.
-
----
-
-## If you STILL want to experiment (educational only)
-
-### ✅ Step 1: Use headful mode
-
-```js
-const browser = await chromium.launch({
-  headless: false,
-  slowMo: 100
-});
+```
+├── agent.js          # Main automation script
+├── encrypt.js        # One-time script to encrypt cookies.json → cookies.enc
+├── cookies.enc       # AES-256 encrypted session cookies (safe to commit)
+├── .github/
+│   └── workflows/
+│       └── update.yml  # GitHub Actions workflow (runs every 40 min)
+├── .env              # Local secrets (never commit)
+├── .gitignore
+└── package.json
 ```
 
 ---
 
-### ✅ Step 2: Use a real user agent
+## Security Model
 
-```js
-const context = await browser.newContext({
-  userAgent:
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-});
-const page = await context.newPage();
+Session cookies are encrypted using **AES-256-CBC** before being committed to the repo.
+
+| File | Committed | Why |
+|------|-----------|-----|
+| `cookies.enc` | ✅ Yes | Encrypted — useless without password |
+| `encrypt.js` | ✅ Yes | Encryption utility |
+| `cookies.json` | ❌ No | Raw cookies — gitignored |
+| `.env` | ❌ No | Plaintext secrets — gitignored |
+
+The decryption password (`COOKIE_PASSWORD`) is stored only in GitHub Actions Secrets and never touches the codebase.
+
+---
+
+## Local Setup
+
+**1. Install dependencies**
+```bash
+npm install
+npx playwright install chromium
+```
+
+**2. Create `.env`**
+```
+COOKIE_PASSWORD=your_strong_password_here
+```
+
+**3. Export cookies from your browser**
+
+Use a browser extension like [EditThisCookie](https://www.editthiscookie.com/) or [Cookie-Editor](https://cookie-editor.com/) to export Naukri cookies as JSON → save as `cookies.json`
+
+**4. Encrypt cookies**
+```bash
+node encrypt.js
+```
+
+This creates `cookies.enc`. Delete `cookies.json` after.
+
+**5. Run locally**
+```bash
+node agent.js
 ```
 
 ---
 
-### ✅ Step 3: Go to homepage first (VERY IMPORTANT)
+## GitHub Actions Setup
 
-```js
-await page.goto('https://www.naukri.com/', {
-  waitUntil: 'networkidle'
-});
-```
+The workflow runs automatically every 40 minutes via cron.
 
-Then navigate naturally:
+**Add these secrets in GitHub → Repo → Settings → Secrets and variables → Actions:**
 
-```js
-await page.click('text=Login');
-```
+| Secret | Value |
+|--------|-------|
+| `COOKIE_PASSWORD` | Password used to encrypt `cookies.enc` |
+| `NAUKRI_USER` | Your Naukri email |
+| `NAUKRI_PASS` | Your Naukri password |
 
----
-
-### ✅ Step 4: Human-like behavior
-
-```js
-await page.mouse.move(200, 300);
-await page.waitForTimeout(1500);
-await page.keyboard.type('your@email.com', { delay: 120 });
-```
+Screenshots from each run are uploaded as artifacts (`Naukri-screenshots`) for debugging.
 
 ---
 
-### ❌ Still will get blocked
+## Re-encrypting Cookies
 
-Even with all this:
+Naukri sessions expire periodically. When the script stops working:
 
-* Akamai uses **behavioral + TLS + JS fingerprinting**
-* Login + profile updates are **high-risk actions**
-
-So don’t expect reliability.
-
----
-
-## What I strongly recommend instead (real-world DevOps approach)
-
-### ✅ Manual login + cookie reuse
-
-1. Login **manually once**
-2. Export cookies
-3. Reuse session (short-lived)
-
-Still risky, but better.
+1. Log in to Naukri manually
+2. Export fresh cookies → `cookies.json`
+3. Run `node encrypt.js`
+4. Commit and push the new `cookies.enc`
+5. Delete `cookies.json`
 
 ---
 
-### ✅ Use reminders instead of automation
+## Tech Stack
 
-* Calendar reminder every 2–3 days
-* Naukri penalizes **too frequent updates anyway**
-
-👉 Updating daily doesn’t help ranking.
-
----
-
-## Why this is actually GOOD for you
-
-As a **DevOps Engineer**, this is a textbook example of:
-
-* WAF
-* Bot detection
-* CDN security
-* Fingerprinting
-* Rate limiting
-
-This experience itself is interview-worthy 😄
-
-> “I experimented with Playwright automation on a production site protected by Akamai and observed real-world bot mitigation techniques.”
+- [Playwright](https://playwright.dev/) — browser automation
+- Node.js `crypto` — AES-256-CBC cookie encryption
+- GitHub Actions — scheduled execution
+- dotenv — local secret management
 
 ---
 
-## Current action items for you
+## Disclaimer
 
-1. **Stop running the script**
-2. Switch network (mobile hotspot)
-3. Wait **12–24 hours**
-4. Login manually
-5. Avoid automation on Naukri
-
-If you want, I can:
-
-* Rewrite this as a **safe demo automation**
-* Show how **stealth detection works**
-* Help you design a **legal automation project** for your resume
-
-Just tell me 👌
+This project is for **educational purposes**. Naukri's ToS does not permit automation. Use at your own risk.
