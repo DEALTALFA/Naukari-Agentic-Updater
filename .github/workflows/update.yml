@@ -40,6 +40,7 @@ jobs:
         env:
           NAUKRI_USER: ${{ secrets.NAUKRI_USER }}
           NAUKRI_PASS: ${{ secrets.NAUKRI_PASS }}
+          COOKIE_PASSWORD: ${{ secrets.COOKIE_PASSWORD }}
       - name: "List directory"
         shell: pwsh
         run: |
