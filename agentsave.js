@@ -79,7 +79,7 @@ if (os.type()=='Linux'){
 	});
 }
 else{
-exec('[Convert]::ToBase64String([System.IO.File]::ReadAllBytes(\'' + process.cwd() + '/cookies.json\'))|Out-File -FilePath "' + process.cwd() + '/encode.json"', {'shell':'powershell.exe'}, (error, stdout, stderr) => {
+exec('[Convert]::ToBase64String([System.IO.File]::ReadAllBytes(\'' + process.cwd() + '/cookies.json\'),[System.Base64FormattingOptions]::InsertLineBreaks)|Out-File -FilePath "' + process.cwd() + '/encode.json"', {'shell':'powershell.exe'}, (error, stdout, stderr) => {
   if (error) {
     console.error(`exec error: ${error}`);
     return;

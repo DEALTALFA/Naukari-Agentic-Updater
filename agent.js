@@ -1,7 +1,7 @@
 const { chromium } = require('playwright');
-
-
+const crypto = require('crypto');
 const fs = require('fs');
+require('dotenv').config();
 
 async function updateNaukri() {
     const browser = await chromium.launch({
@@ -22,22 +22,14 @@ const page = await context.newPage();
   waitUntil: 'networkidle'
 });
 
-async function injectCookies(context) {
-  try {
-    // Read cookies from the file if it exists
-    if (fs.existsSync('cookies.json')) {
-      const cookies = JSON.parse(fs.readFileSync('cookies.json'));
-      await context.addCookies(cookies);
-    } else {
-      console.log('cookies.json not found, proceeding without cookies');
-    }
-  } catch (err) {
-    console.log('Error injecting cookies:', err.message);
-  }
+function loadCookies() {
+  const key = crypto.scryptSync(process.env.COOKIE_PASSWORD, 'salt', 32);
+  const [ivHex, encrypted] = fs.readFileSync('cookies.enc', 'utf8').split(':');
+  const decipher = crypto.createDecipheriv('aes-256-cbc', key, Buffer.from(ivHex, 'hex'));
+  return JSON.parse(decipher.update(encrypted, 'hex', 'utf8') + decipher.final('utf8'));
 }
 
-// Example usage before visiting Naukri:
-await injectCookies(context);
+await context.addCookies(loadCookies());
 
  
  await page.screenshot({path: "01.png"});

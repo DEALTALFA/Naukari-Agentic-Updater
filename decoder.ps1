@@ -5,7 +5,7 @@ $outputFile = "cookies.json"
 Write-Host "Starting script for Decoding"
 
 # 1. Read the Base64 string from the input file as a single string (using -Raw)
-$base64String = Get-Content -Path $inputFile -Raw
+$base64String = (Get-Content -Path $inputFile -Raw).Trim()
 Write-Host "File Read Done"
 # 2. Convert the Base64 string to a byte array
 $bytes = [Convert]::FromBase64String($base64String)
