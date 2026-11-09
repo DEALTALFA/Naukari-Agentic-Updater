@@ -53,7 +53,7 @@ await page.click('(//span[text()="Jobs"])[1]');
 await page.waitForTimeout(3000);
 await page.screenshot({path: "04.png"});
 
-if (await page.locator('//span[contains(.,"₹")]').isVisible()) {
+if (await page.locator('//li[contains(.,"₹")]').isVisible()) {
   console.log("Salary filter is visible, clicking on it...");
   await page.click('(//em[@class="naukicon naukicon-ot-pencil"])[3]',{state: 'visible', timeout: 30000});
   await page.click('//input[@class="currency-input "]',{state: 'visible', timeout: 30000});
@@ -83,7 +83,7 @@ console.log("Clicking on Jobs at the end...");
 await page.click('(//span[text()="Jobs"])[1]');
 await page.waitForTimeout(3000);
 await page.screenshot({path: "08.png"});
-if (await page.locator('//span[contains(.,"₹")]').isVisible()) {
+if (await page.locator('//li[contains(.,"₹")]').isVisible()) {
   console.log("Salary filter is visible at the end, editing on it...");
   await page.click('(//em[@class="naukicon naukicon-ot-pencil"])[3]',{state: 'visible', timeout: 30000});
   await page.click('//input[@class="currency-input "]',{state: 'visible', timeout: 30000});
