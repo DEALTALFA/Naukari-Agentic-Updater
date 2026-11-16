@@ -2,7 +2,7 @@ name: Update Naukri Profile
 
 on:
   schedule:
-    - cron: "*/4 * * * *" # Runs every 4 minutes
+    - cron: "*/5 * * * *" # Runs every 5 minutes
   workflow_dispatch: 
 
 permissions:
@@ -35,8 +35,23 @@ jobs:
       #   run: |
       #     .\decoder.ps1
           
-      - name: Run Naukri agent
-        run: node agent.js
+      # - name: Run Naukri agent
+      #   run: node agent.js
+      #   env:
+      #     NAUKRI_USER: ${{ secrets.NAUKRI_USER }}
+      #     NAUKRI_PASS: ${{ secrets.NAUKRI_PASS }}
+      #     COOKIE_PASSWORD: ${{ secrets.COOKIE_PASSWORD }}
+      - name: Retry Step
+        uses: nick-fields/retry@v3.0.2
+        with:
+          # Minutes to wait before attempt times out.  Must only specify either minutes or seconds
+          timeout_minutes: 10
+          # Number of attempts to make before failing the step
+          max_attempts: 3
+          # The command to run
+          command: node agent.js
+          # Number of seconds to wait before attempting the next retry
+          retry_wait_seconds: 30
         env:
           NAUKRI_USER: ${{ secrets.NAUKRI_USER }}
           NAUKRI_PASS: ${{ secrets.NAUKRI_PASS }}
